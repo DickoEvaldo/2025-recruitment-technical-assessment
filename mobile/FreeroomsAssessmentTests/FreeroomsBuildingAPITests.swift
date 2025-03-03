@@ -71,73 +71,73 @@ final class FreeroomsBuildingAPITests {
     }
     
     /// Ensures that an empty response from the API correctly results in an empty list.
-//    @Test("Building loader returns empty list of buildings")
-//    func buildingLoaderReturnsEmptyListOfBuildings() async {
-//        let (client, sut) = makeSut()
-//        client.setNextRequestToSucceedWithReturnedData([RemoteBuilding]().data)
-//        
-//        var receivedBuildings: [Building]?
-//        switch await sut.fetchBuildings() {
-//        case let .success(fetchedBuildings):
-//            receivedBuildings = fetchedBuildings
-//        case let .failure(error):
-//            Issue.record("Expected a list of empty buildings but got \(error)")
-//        }
-//        
-//        #expect(receivedBuildings?.isEmpty == true)
-//        #expect(client.networkCallCount == 1)
-//    }
+    @Test("Building loader returns empty list of buildings")
+    func buildingLoaderReturnsEmptyListOfBuildings() async {
+        let (client, sut) = makeSut()
+        client.setNextRequestToSucceedWithReturnedData([RemoteBuilding]().data)
+        
+        var receivedBuildings: [Building]?
+        switch await sut.fetchBuildings() {
+        case let .success(fetchedBuildings):
+            receivedBuildings = fetchedBuildings
+        case let .failure(error):
+            Issue.record("Expected a list of empty buildings but got \(error)")
+        }
+        
+        #expect(receivedBuildings?.isEmpty == true)
+        #expect(client.networkCallCount == 1)
+    }
     
     /// Verifies that valid building data is correctly returned and  decoded from the API.
-//    @Test("Building loader returns list of buildings")
-//    func buildingLoaderReturnsListOfBuildings() async {
-//        let (client, sut) = makeSut()
-//        let expectedBuildings = makeUniqueBuildings()
-//        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
-//        
-//        var receivedBuildings: [Building]?
-//        switch await sut.fetchBuildings() {
-//        case let .success(fetchedBuildings):
-//            receivedBuildings = fetchedBuildings
-//        case let .failure(error):
-//            Issue.record("Expected \(expectedBuildings) but got \(error)")
-//        }
-//        
-//        #expect(receivedBuildings == expectedBuildings)
-//        #expect(client.networkCallCount == 1)
-//    }
+    @Test("Building loader returns list of buildings")
+    func buildingLoaderReturnsListOfBuildings() async {
+        let (client, sut) = makeSut()
+        let expectedBuildings = makeUniqueBuildings()
+        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
+        
+        var receivedBuildings: [Building]?
+        switch await sut.fetchBuildings() {
+        case let .success(fetchedBuildings):
+            receivedBuildings = fetchedBuildings
+        case let .failure(error):
+            Issue.record("Expected \(expectedBuildings) but got \(error)")
+        }
+        
+        #expect(receivedBuildings == expectedBuildings)
+        #expect(client.networkCallCount == 1)
+    }
     
     /// Ensures that consecutive fetch requests return updated results instead of cached data.
-//    @Test("Building loader fetch requests return different lists of buildings")
-//    func buildingLoaderFetchRequestDoesNotCache() async {
-//        let (client, sut) = makeSut()
-//        var expectedBuildings = makeUniqueBuildings()
-//        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
-//        
-//        var receivedBuildings: [Building]?
-//        switch await sut.fetchBuildings() {
-//        case let .success(fetchedBuildings):
-//            receivedBuildings = fetchedBuildings
-//        case let .failure(error):
-//            Issue.record("Expected \(expectedBuildings) but got \(error)")
-//        }
-//        
-//        #expect(receivedBuildings == expectedBuildings)
-//        #expect(client.networkCallCount == 1)
-//        
-//        expectedBuildings = makeUniqueBuildings()
-//        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
-//        
-//        switch await sut.fetchBuildings() {
-//        case let .success(fetchedBuildings):
-//            receivedBuildings = fetchedBuildings
-//        case let .failure(error):
-//            Issue.record("Expected \(expectedBuildings) but got \(error)")
-//        }
-//        
-//        #expect(receivedBuildings == expectedBuildings)
-//        #expect(client.networkCallCount == 2)
-//    }
+    @Test("Building loader fetch requests return different lists of buildings")
+    func buildingLoaderFetchRequestDoesNotCache() async {
+        let (client, sut) = makeSut()
+        var expectedBuildings = makeUniqueBuildings()
+        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
+        
+        var receivedBuildings: [Building]?
+        switch await sut.fetchBuildings() {
+        case let .success(fetchedBuildings):
+            receivedBuildings = fetchedBuildings
+        case let .failure(error):
+            Issue.record("Expected \(expectedBuildings) but got \(error)")
+        }
+        
+        #expect(receivedBuildings == expectedBuildings)
+        #expect(client.networkCallCount == 1)
+        
+        expectedBuildings = makeUniqueBuildings()
+        client.setNextRequestToSucceedWithReturnedData(expectedBuildings.toRemoteBuildings.data)
+        
+        switch await sut.fetchBuildings() {
+        case let .success(fetchedBuildings):
+            receivedBuildings = fetchedBuildings
+        case let .failure(error):
+            Issue.record("Expected \(expectedBuildings) but got \(error)")
+        }
+        
+        #expect(receivedBuildings == expectedBuildings)
+        #expect(client.networkCallCount == 2)
+    }
     
     
     

@@ -35,7 +35,18 @@ public class BuildingLoader {
             do {
                 let remoteBuildings = try JSONDecoder().decode([RemoteBuilding].self, from: data)
                 
-                fatalError("TODO")
+                // map remote buildings into buildings.
+                let buildings = remoteBuildings.map { remoteBuilding in
+                    Building(
+                        name: remoteBuilding.building_name,
+                        id: remoteBuilding.building_id.uuidString,
+                        latitude: remoteBuilding.building_latitude,
+                        longitude: remoteBuilding.building_longitude,
+                        aliases: remoteBuilding.building_aliases
+                    )
+                }
+                
+                return .success(buildings)
             } catch {
                 return .failure(Error.invalidData)
             }
