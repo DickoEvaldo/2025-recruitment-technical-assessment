@@ -23,6 +23,14 @@ public class BuildingLoader {
     }
     
     public func fetchBuildings() async -> Result  {
-        fatalError("TODO")
+        switch await self.client.get(from: self.url) {
+        case .success((_, _)):
+            return .failure(Error.invalidData)
+        
+        // if get returns an error return connectivity error
+        case.failure(_):
+            return .failure(Error.connectivity)
+        }
+        
     }
 }
